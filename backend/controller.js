@@ -166,12 +166,17 @@ exports.updateTransaction = async (req, res) => {
     }
 
     if (date) {
-      let newDate = new Date(date);
-      if (!isNaN(newDate)) {
-        const currentTime = new Date(transaction.date).toTimeString();
-        const [hours, minutes, seconds] = currentTime.split(":");
-        newDate.setHours(hours, minutes, seconds);
+      const newDate = new Date(date);
+      if (newDate instanceof Date && !isNaN(newDate.getTime())) {
+        const original = new Date(transaction.date);
+        newDate.setHours(
+          original.getHours(),
+          original.getMinutes(),
+          original.getSeconds()
+        );
         transaction.date = newDate;
+      } else {
+        console.log("Invalid date received:", date);
       }
     }
 

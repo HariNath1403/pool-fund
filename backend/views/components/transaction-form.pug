@@ -7,6 +7,17 @@ form.form(action=isEdit ? `/api/txn/update/${transaction._id}` : '/api/txn/add',
   else
     h2.form__header Withdrawal Form
 
+  if isEdit
+    .form__row#txn-row-date
+      label.form__row--label(for="txn-date") Date of Transaction*
+      input.form__row--input(
+        type="date",
+        id="txn-date",
+        name="date",
+        required,
+        value=(transaction && transaction.date && !isNaN(new Date(transaction.date))) ? new Date(transaction.date).toISOString().split('T')[0] : ''
+      )
+
   .form__row#txn-row-amount
     label.form__row--label(for="txn-amount") Amount*
     input.form__row--input(
@@ -39,8 +50,15 @@ form.form(action=isEdit ? `/api/txn/update/${transaction._id}` : '/api/txn/add',
       id="txn-attachment",
       name="attachment"
     )
-    p Current file: 
-        a(href=`/${transaction.attachment_url}`, target="_blank") View PDF
+    if transaction && transaction.attachment_url
+      if transaction.attachment_url.endsWith('.pdf')
+        p Current file: 
+          a(href=`/${transaction.attachment_url}`, target="_blank") View PDF
+      else
+        p Current image:
+        img(src=`/${transaction.attachment_url}`, alt="Attachment", style="max-width: 200px; max-height: 200px; margin-top: 0.5rem;")
+    else
+      p No file uploaded.
 
   if user.role === 'Admin'
     button.form__submit(type="submit")= isEdit ? 'Update' : 'Submit'
