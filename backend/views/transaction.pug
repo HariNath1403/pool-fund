@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  .section.container#form-transaction
+    - const type = locals.type || 'Deposit'
+    include components/transaction-form.pug
+

@@ -1,0 +1,29 @@
+extends layout 
+
+block content 
+
+  .section.container#page-qr
+    .qr
+      h2.qr__header QR Code
+      .qr__space
+        img.qr__space--img(src="/img/qr-code-hari.jpeg", alt="QR Code")
+
+      ol.qr__steps
+        li.qr__steps--line
+          span.qr__steps--line--highlight Screenshot
+          |  this page to save the QR code.
+
+        li.qr__steps--line
+          | Make the transaction by
+          span.qr__steps--line--highlight scanning the QR
+          |  code using your MAE app.
+
+        li.qr__steps--line
+          span.qr__steps--line--highlight Save
+          |  the PDF version of your transaction receipt or take a screenshot of the transaction.
+
+        li.qr__steps--line
+          span.qr__steps--line--highlight Complete the deposit form
+          |  and upload the receipt.
+
+      a.qr__exit(type="button", href="/home") X

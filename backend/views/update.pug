@@ -1,0 +1,48 @@
+extends layout 
+
+block content 
+
+  .section.container.register#form-register 
+    form.form(method="POST", action=`/api/user/update/${user._id}`)
+      h2.form__header Update Account 
+
+      .form__row#register-row-username 
+        label.form__row--label(for="register-username") Username
+        input.form__row--input#register-username(
+        type="text", 
+        maxLength="10", 
+        placeholder="Max 10 characters", 
+        name="username", 
+        value=(user && user.username) ? user.username : "")
+        p.form__row--error(style=errorType==="username" ? "display:block" : "display:none") *Username must not exceed 10 characters 
+
+      .form__row#register-row-email
+        label.form__row--label(for="register-email") Email
+        input.form__row--input#register-email(
+        type="email", 
+        placeholder="Enter your MOH email", 
+        name="email", 
+        value=(user && user.email) ? user.email : "", readonly)
+        p.form__row--error(style=errorType==="email" ? "display:block" : "display:none") *Invalid email address / Email address is taken
+
+      .form__row#register-row-password
+        label.form__row--label(for="register-password") Password
+        input.form__row--input#register-password(type="password", placeholder="Input new / old password here", minLength="6",  name="password")
+        p.form__row--error(style=errorType==="password" ? "display:block" : "display:none") *Password does not meet requirement
+
+      .form__row#register-row-facility 
+        label.form__row--label(for="register-facility") Facility
+        - const facilities = ["PKD Tampin", "KK Tampin", "KK Gemas", "KK Gemencheh", "KK Jelai", "KK AKS", "KK BRU"]
+        select.form__row--input#register-facility(name="facility")
+          option(value="", disabled selected)= !user ? "Select a facility" : ""
+          each facilityOption in facilities
+            option(value=facilityOption, 
+            selected=(user && user.facility === facilityOption) ? "selected" : false)= facilityOption
+        p.form__row--error(style=errorType==="facility" ? "display:block" : "display:none") *Please select a facility
+
+        .form__row 
+          p.form__row--other Already have an account?
+            span 
+              a(href="/login") Login here
+
+        button.form__submit#register-submit(type="submit") Update     

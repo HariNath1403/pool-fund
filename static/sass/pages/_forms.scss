@@ -1,0 +1,102 @@
+.form {
+  height: 100%;
+  background-color: $color-accent;
+  padding: calc(#{$space-xxl}* 1.5) $space-lg;
+  position: relative;
+
+  &__exit {
+    border: none;
+    border-radius: 9px;
+    box-shadow: 0 1rem 2rem rgba($color-text, 0.05);
+    background-color: $color-error;
+    color: $color-background;
+    padding: $space-xs $space-sm;
+    font-size: $text-body;
+    position: absolute;
+    top: $space-md;
+    right: $space-md;
+  }
+
+  &__header {
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 700;
+    font-size: $text-header-sub;
+    margin-bottom: $space-xl;
+  }
+
+  &__row {
+    @include flex-col;
+    gap: $space-xs;
+    align-items: flex-start;
+
+    &:not(:last-child) {
+      margin-bottom: $space-sm;
+    }
+
+    &--label {
+      font-size: $text-section-title;
+      color: $color-text;
+    }
+
+    &--input {
+      padding: $space-xs $space-xxs;
+      background-color: $color-background;
+      color: $color-text;
+      font-family: inherit;
+      font-size: $text-body;
+      width: 100%;
+      border: none;
+
+      &::placeholder {
+        color: rgba($color-text, 0.5);
+        font-family: inherit;
+      }
+
+      option {
+        color: rgba($color-text, 0.5);
+        font-family: inherit;
+      }
+    }
+
+    &--error {
+      display: none;
+      font-size: $text-small;
+      font-weight: 500;
+      color: $color-error;
+      padding-left: $space-xs;
+      margin-top: -$space-xxs;
+    }
+  }
+
+  &__submit {
+    margin-top: $space-lg;
+    padding: $space-xs $space-sm;
+    width: 50%;
+    border: none;
+    border-radius: 9px;
+    color: $color-background;
+    background-color: $color-error;
+    box-shadow: 0 1rem 2rem rgba($color-text, 0.05);
+    font-size: $text-section-title;
+    font-size: calc(#{$text-body + $text-section-title}/ 2);
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 1.8px;
+  }
+
+  &__logo {
+    padding: $space-lg $space-sm;
+    @include flex-row;
+
+    &--icon {
+      font-size: 6.5rem;
+      color: $color-error;
+    }
+  }
+}
+
+#form-login,
+#form-register {
+  z-index: 4;
+}

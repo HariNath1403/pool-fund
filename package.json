@@ -1,0 +1,33 @@
+{
+  "name": "new-draft",
+  "version": "1.0.0",
+  "description": "landing page",
+  "main": "index.js",
+  "scripts": {
+    "watch:sass": "node-sass static/sass/main.scss static/css/style.css -w",
+    "devserver": "live-server",
+    "start-front": "npm-run-all --parallel devserver watch:sass",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "author": "Hari",
+  "license": "ISC",
+  "devDependencies": {
+    "node-sass": "^9.0.0",
+    "nodemon": "^3.1.10"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cloudinary": "^1.41.3",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "express-session": "^1.18.1",
+    "jsonwebtoken": "^9.0.2",
+    "moment": "^2.30.1",
+    "mongodb": "^6.17.0",
+    "mongoose": "^8.15.2",
+    "multer": "^2.0.1",
+    "multer-storage-cloudinary": "^4.0.0",
+    "pug": "^3.0.3"
+  }
+}

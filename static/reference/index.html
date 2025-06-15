@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>PF Pool Fund</title>
+  </head>
+  <body>
+    <div class="section container" id="home">
+      <div class="nav">
+        <ul class="nav__home">
+          <li class="nav__home--list">
+            <h3 class="nav__home--header">Welcome Hari</h3>
+          </li>
+          <li class="nav__home--list">
+            <a href="#" class="nav__home--menu">
+              <ion-icon name="menu" class="nav__home--menu--icon"></ion-icon>
+            </a>
+          </li>
+        </ul>
+        <div class="nav__shown">
+          <button class="nav__shown--exit">X</button>
+          <ul class="nav__shown--list">
+            <li><a href="#">Deposit</a></li>
+            <li><a href="#">Withdrawal</a></li>
+            <li><a href="#">QR Code</a></li>
+            <li><a href="#">Txn History</a></li>
+            <li><a href="#">Receipts</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="home__main">
+        <div class="home__balance">
+          <h3 class="home__balance--title">Balance:</h3>
+          <h2 class="home__balance--amount">
+            <span class="home__balance--amount--currency">RM</span>
+            <span class="home__balance--amount--value">200.50</span>
+          </h2>
+        </div>
+        <div class="home__txn">
+          <h2 class="home__txn--header">Recent Transactions</h2>
+          <ul class="home__txn--list">
+            <li class="home__txn--list--row home__txn--list--row--withdrawal">
+              Hari withdrew RM50.00 yesterday for PICC Sesi 2
+            </li>
+            <li class="home__txn--list--row">
+              Mary added RM100.00 to the pool 3 days ago
+            </li>
+            <li class="home__txn--list--row">
+              Aiman added RM100.00 to the pool 7 days ago
+            </li>
+            <li class="home__txn--list--row">
+              Aina added RM75.50 to the pool on 02/06/25
+            </li>
+            <li class="home__txn--list--row home__txn--list--row--withdrawal">
+              Hari withdrew RM50.00 on 01/06/25 for Mesy YM Bil 1/25
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="section container" id="form-deposit">
+      <form
+        action="/api/txn/add"
+        method="POST"
+        enctype="multipart/form-data"
+        class="form"
+      >
+        <div class="form__header">Deposit Form</div>
+        <div class="form__row" id="deposit-row-amount">
+          <label for="deposit-amount" class="form__row--label">Amount*</label>
+          <input
+            type="number"
+            step="0.01"
+            min="0.01"
+            id="deposit-amount"
+            class="form__row--input"
+            placeholder="Input amount (only number)"
+          />
+          <p class="form__row--error">*Invalid / Missing Input</p>
+        </div>
+        <div class="form__row" id="deposit-row-details">
+          <label for="deposit-details" class="form__row--label">Details*</label>
+          <input
+            type="text"
+            id="deposit-details"
+            class="form__row--input"
+            placeholder="Input details / comments"
+          />
+          <p class="form__row--error">*Invalid / Missing Input</p>
+        </div>
+        <div class="form__row" id="deposit-row-attachment">
+          <label for="deposit-attachment" class="form__row--label"
+            >Attachment*</label
+          >
+          <input
+            type="file"
+            accept="image/*,application/pdf"
+            id="deposit-attachment"
+            class="form__row--input"
+          />
+          <p class="form__row--error">*Invalid / Missing Input</p>
+        </div>
+        <button class="form__submit" id="deposit-submit">Submit</button>
+        <button class="form__exit" id="deposit-exit">X</button>
+      </form>
+    </div>
+    <div class="section container" id="form-withdrawal">
+      <form
+        action="/api/txn/add"
+        method="POST"
+        enctype="multipart/form-data"
+        class="form"
+      >
+        <div class="form__header">Withdrawal Form</div>
+        <div class="form__row" id="withdrawal-row-amount">
+          <label for="withdrawal-amount" class="form__row--label"
+            >Amount*</label
+          >
+          <input
+            type="number"
+            step="0.01"
+            min="0.01"
+            id="withdrawal-amount"
+            class="form__row--input"
+            placeholder="Input amount (only number)"
+          />
+          <p class="form__row--error">*Invalid / Missing Input</p>
+        </div>
+        <div class="form__row" id="withdrawal-row-details">
+          <label for="withdrawal-details" class="form__row--label"
+            >Details*</label
+          >
+          <input
+            type="text"
+            id="withdrawal-details"
+            class="form__row--input"
+            placeholder="Input details / comments"
+          />
+          <p class="form__row--error">*Invalid / Missing Input</p>
+        </div>
+        <div class="form__row" id="withdrawal-row-attachment">
+          <label for="withdrawal-attachment" class="form__row--label"
+            >Attachment*</label
+          >
+          <input
+            type="file"
+            accept="image/*,application/pdf"
+            id="withdrawal-attachment"
+            class="form__row--input"
+          />
+          <p class="form__row--error">*Invalid / Missing Input</p>
+        </div>
+        <button class="form__submit" id="withdrawal-submit">Submit</button>
+        <button class="form__exit" id="withdrawal-exit">X</button>
+      </form>
+    </div>
+    <div class="section container" id="page-qr">
+      <div class="qr">
+        <h2 class="qr__header">QR Code</h2>
+        <div class="qr__space">
+          <img
+            src="img/qr-code-hari.jpeg"
+            alt="QR Code"
+            class="qr__space--img"
+          />
+        </div>
+        <ol class="qr__steps">
+          <li class="qr__steps--line">
+            <span class="qr__steps--line--highlight">Screenshot</span> this page
+            to save the QR code.
+          </li>
+          <li class="qr__steps--line">
+            Make the transaction by
+            <span class="qr__steps--line--highlight">scanning the QR</span> code
+            using your MAE app.
+          </li>
+          <li class="qr__steps--line">
+            <span class="qr__steps--line--highlight">Save</span> the PDF version
+            of your transaction receipt or take a screenshot of the transaction.
+          </li>
+          <li class="qr__steps--line">
+            <span class="qr__steps--line--highlight"
+              >Complete the deposit form</span
+            >
+            and upload the receipt.
+          </li>
+        </ol>
+        <button class="qr__exit">X</button>
+      </div>
+    </div>
+    <div class="section container all" id="all">
+      <button class="all__exit">X</button>
+      <h2 class="all__header">All Transactions</h2>
+      <div class="all__limit">
+        <table class="all__table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Amount (RM)</th>
+              <th>Staff</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="all__table--row">
+              <td>13-06-25</td>
+              <td>10.05</td>
+              <td>Mary</td>
+              <td>Pool money for meeting</td>
+            </tr>
+            <tr class="all__table--row all__table--row--neg">
+              <td>12-06-25</td>
+              <td>-15.00</td>
+              <td>Hari</td>
+              <td>Purchase of lunch</td>
+            </tr>
+            <tr class="all__table--row">
+              <td>11-06-25</td>
+              <td>20.50</td>
+              <td>Aina</td>
+              <td>Snacks for event</td>
+            </tr>
+            <tr class="all__table--row all__table--row--neg">
+              <td>10-06-25</td>
+              <td>-30.00</td>
+              <td>Yi Tyeng</td>
+              <td>Grocery top-up</td>
+            </tr>
+            <tr class="all__table--row">
+              <td>09-06-25</td>
+              <td>12.75</td>
+              <td>Radznah</td>
+              <td>Team birthday fund</td>
+            </tr>
+            <tr class="all__table--row">
+              <td>11-06-25</td>
+              <td>20.50</td>
+              <td>Aina</td>
+              <td>Snacks for event</td>
+            </tr>
+            <tr class="all__table--row all__table--row--neg">
+              <td>10-06-25</td>
+              <td>-30.00</td>
+              <td>Yi Tyeng</td>
+              <td>Grocery top-up</td>
+            </tr>
+            <tr class="all__table--row all__table--row--neg">
+              <td>10-06-25</td>
+              <td>-30.00</td>
+              <td>Yi Tyeng</td>
+              <td>Grocery top-up</td>
+            </tr>
+            <tr class="all__table--row all__table--row--neg">
+              <td>10-06-25</td>
+              <td>-30.00</td>
+              <td>Yi Tyeng</td>
+              <td>Grocery top-up</td>
+            </tr>
+            <tr class="all__table--row">
+              <td>11-06-25</td>
+              <td>20.50</td>
+              <td>Aina</td>
+              <td>Snacks for event</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="section container login" id="form-login">
+      <form action="#" method="POST" class="form">
+        <div class="form__logo">
+          <ion-icon name="wallet" class="form__logo--icon"></ion-icon>
+        </div>
+        <div class="form__header">Pool Fund (YM)</div>
+        <div class="form__row" id="login-row-user">
+          <label for="login-user" class="form__row--label"
+            >Username / Email</label
+          >
+          <input
+            type="text"
+            id="login-user"
+            class="form__row--input"
+            placeholder="Username / Email"
+          />
+          <p class="form__row--error">*Username / Email does not exist</p>
+        </div>
+        <div class="form__row" id="login-row-password">
+          <label for="login-password" class="form__row--label">Password</label>
+          <input
+            type="password"
+            id="login-password"
+            class="form__row--input"
+            placeholder="Input password"
+          />
+          <p class="form__row--error">*Incorrect password</p>
+        </div>
+        <div class="form__row">
+          <p class="form__row--other">
+            Don't have an account? <span><a href="#">Click here</a></span>
+          </p>
+        </div>
+        <button class="form__submit" id="login-submit">Login</button>
+      </form>
+    </div>
+    <div class="section container register" id="form-register">
+      <form action="#" method="POST" class="form">
+        <div class="form__header">Create Account</div>
+
+        <!-- Username -->
+        <div class="form__row" id="register-row-username">
+          <label for="register-username" class="form__row--label"
+            >Username</label
+          >
+          <input
+            type="text"
+            id="register-username"
+            class="form__row--input"
+            maxlength="10"
+            placeholder="Max 10 characters"
+          />
+          <p class="form__row--error">
+            *Username must not exceed 10 characters
+          </p>
+        </div>
+
+        <!-- Email -->
+        <div class="form__row" id="register-row-email">
+          <label for="register-email" class="form__row--label">Email</label>
+          <input
+            type="email"
+            id="register-email"
+            class="form__row--input"
+            placeholder="Enter your MOH email"
+          />
+          <p class="form__row--error">*Invalid email address</p>
+        </div>
+
+        <!-- Password -->
+        <div class="form__row" id="register-row-password">
+          <label for="register-password" class="form__row--label"
+            >Password</label
+          >
+          <input
+            type="password"
+            id="register-password"
+            minlength="6"
+            class="form__row--input"
+            placeholder="Min 6 characters"
+          />
+          <p class="form__row--error">*Password must meet requirements</p>
+        </div>
+
+        <!-- Facility Select -->
+        <div class="form__row" id="register-row-facility">
+          <label for="register-facility" class="form__row--label"
+            >Facility</label
+          >
+          <select id="register-facility" class="form__row--input">
+            <option disabled selected value="">Select a facility</option>
+            <option value="pkd-tampin">PKD Tampin</option>
+            <option value="kk-tampin">KK Tampin</option>
+            <option value="kk-gemas">KK Gemas</option>
+            <option value="kk-gemencheh">KK Gemencheh</option>
+            <option value="kk-jelai">KK Jelai</option>
+            <option value="kk-aks">KK AKS</option>
+            <option value="kk-bru">KK BRU</option>
+          </select>
+          <p class="form__row--error">*Facility is required</p>
+        </div>
+
+        <div class="form__row">
+          <p class="form__row--other">
+            Already have an account? <span><a href="#">Login here</a></span>
+          </p>
+        </div>
+
+        <button class="form__submit" id="register-submit">Register</button>
+      </form>
+    </div>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
+</html>

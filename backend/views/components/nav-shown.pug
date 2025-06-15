@@ -1,0 +1,15 @@
+.nav__shown 
+  button.nav__shown--exit X 
+  ul.nav__shown--list 
+    if user.role === 'Admin'
+      li: a(href="/add?type=Deposit") Deposit
+      li: a(href="/add?type=Withdrawal") Withdrawal
+      li: a(href="/history") Txn History
+      li: a(href="#") Receipts
+      li: a(href="/update") Profile
+    else
+      li: a(href="/add?type=Deposit") Deposit
+      li: a(href="/qr") QR Code
+      li: a(href="/history") Txn History
+      li: a(href="/update") Profile
+      li: a(href="#") Contact

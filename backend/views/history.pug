@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  .section.container.all#all
+    a.all__exit(href="/home") X
+    h2.all__header All Transactions
+    .all__limit
+      table.all__table
+        thead
+          tr
+            th Date
+            th Amount (RM)
+            th Staff
+            th Details
+        tbody
+          each txn in transactions
+            tr(          class=`all__table--row${txn.amount < 0 ? ' all__table--row--neg' : ''}`,
+            onclick=`window.location='/add/${txn._id}'`)
+              td= txn.date
+              td= txn.amount.toFixed(2)
+              td= txn.staff
+              td= txn.details

@@ -1,0 +1,36 @@
+extends layout 
+
+block content 
+
+  .section.container.login#form-login 
+    form.form(method="POST", action="/api/user/login")
+      .form__logo 
+        ion-icon.form__logo--icon(name="wallet")
+      h2.form__header Pool Fund
+
+      .form__row#login-row-user 
+        label.form__row--label(for="login-user") Username / Email 
+        input.form__row--input#login-user(type="text", name="loginInput", placeholder="Username / Email")
+        p.form__row--error(style=errorType==='user' ? 'display:block' : 'display:none') *Username / Email does not exist
+
+      .form__row#login-row-password 
+        label.form__row--label(for="login-password") Password
+        input.form__row--input#login-password(type="password", name="password", placeholder="Input password")
+        p.form__row--error(style=errorType==='password' ? 'display:block' : 'display:none') *Incorrect password
+        p.form__row--error(style=errorType==='server' ? 'display:block' : 'display:none') *An unexpected error occurred. Please try again.
+
+      if successType === "accountCreated"
+        p.form__row--success(style="color: #228B22") Account created successfully! Please log in.
+      if successType === "accountUpdated"
+        p.form__row--success(style="color: #228B22") Account updated successfully! Please log in.
+
+      .form__row 
+        p.form__row--other
+          | Don't have an account? 
+          span 
+            a(href="/register") Click here
+
+      button.form__submit(type="submit" id="login-submit") Login
+
+  script(type="module", src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js")
+  script(nomodule, src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js")

@@ -1,0 +1,50 @@
+form.form(action=isEdit ? `/api/txn/update/${transaction._id}` : '/api/txn/add', method="POST", enctype="multipart/form-data")
+  input(type="hidden", name="user_id", value=user._id)
+  input(type="hidden", name="type", value=type)
+
+  if type === 'Deposit'
+    h2.form__header Deposit Form
+  else
+    h2.form__header Withdrawal Form
+
+  .form__row#txn-row-amount
+    label.form__row--label(for="txn-amount") Amount*
+    input.form__row--input(
+      type="number",
+      step="0.01",
+      min="0.01",
+      id="txn-amount",
+      name="amount",
+      placeholder="Input amount",
+      required,
+      value=transaction ? Math.abs(transaction.amount) : ''
+    )
+
+  .form__row#txn-row-details
+    label.form__row--label(for="txn-details") Details*
+    input.form__row--input(
+      type="text",
+      id="txn-details",
+      name="details",
+      placeholder="Input details / comments",
+      required,
+      value=transaction ? transaction.details : ''
+    )
+
+  .form__row#txn-row-attachment
+    label.form__row--label(for="txn-attachment") Attachment
+    input.form__row--input(
+      type="file",
+      accept="image/*,application/pdf",
+      id="txn-attachment",
+      name="attachment"
+    )
+    p Current file: 
+        a(href=`/${transaction.attachment_url}`, target="_blank") View PDF
+
+  if user.role === 'Admin'
+    button.form__submit(type="submit")= isEdit ? 'Update' : 'Submit'
+  else
+    p You don't have permission to perform this action.
+
+  button.form__exit(type="button", onclick="window.history.back()") X

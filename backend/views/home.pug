@@ -1,0 +1,31 @@
+extends layout 
+
+block content 
+  .section.container#home 
+    .nav 
+      ul.nav__home
+        li.nav__home--list
+          h3.nav__home--header Welcome #{user.username}
+        li.nav__home--list 
+          a.nav__home--menu(href="#")
+            ion-icon.nav__home--menu--icon(name="menu")
+      
+      include components/nav-shown.pug
+
+    .home__main 
+      .home__balance 
+        h3.home__balance--title Balance: 
+        h2.home__balance--amount 
+          span.home__balance--amount--currency RM 
+          span.home__balance--amount--value #{balance}
+      .home__txn 
+        h2.home__txn--header Recent Transactions 
+        ul.home__txn--list 
+          each txn in transactions 
+            li(class=`home__txn--list--row ${txn.type === 'Withdrawal' ? 'home__txn--list--row--withdrawal' : ''}`) #{txn.msg}
+
+  script(type="module", src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js")
+  script(nomodule, src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js")
+
+  script(src='/js/views/nav.js')
+

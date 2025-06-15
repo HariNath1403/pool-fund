@@ -1,0 +1,63 @@
+.home {
+  &__main {
+    @include flex-col;
+  }
+  &__balance {
+    @include flex-col;
+    background-color: $color-main;
+    color: $color-background;
+    gap: $space-md;
+    padding: $space-xl 0;
+    width: 100%;
+
+    &--title {
+      text-transform: uppercase;
+      font-size: $text-section-title;
+      font-weight: 300;
+    }
+
+    &--amount {
+      @include flex-row;
+      gap: $space-xs;
+      font-size: $text-header-sub;
+      font-weight: 700;
+    }
+  }
+
+  &__txn {
+    margin-top: $space-md;
+    text-align: center;
+
+    &--header {
+      font-size: $text-section-title;
+      color: $color-main;
+    }
+
+    &--list {
+      @include flex-col;
+      gap: calc(#{$space-sm + $space-md}/ 2);
+      justify-content: flex-start;
+      margin-top: $space-md;
+      padding: $space-sm $space-md;
+      height: 32.5rem;
+      overflow-y: scroll;
+
+      &--row {
+        list-style: none;
+        font-size: $text-small;
+        font-size: $text-body;
+        font-weight: 500;
+        padding: $space-xs;
+        color: $color-main;
+        background-color: $color-accent;
+        box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.05);
+        border-radius: 9px;
+
+        &--withdrawal {
+          color: $color-background;
+          background-color: $color-error;
+        }
+      }
+    }
+  }
+}
