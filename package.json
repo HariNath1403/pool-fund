@@ -1,21 +1,19 @@
 {
-  "name": "new-draft",
+  "name": "ym-balance-app",
   "version": "1.0.0",
-  "description": "landing page",
-  "main": "index.js",
+  "description": "Finance tracker app for YM using Express, MongoDB and Pug",
+  "main": "server.js",
   "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
     "watch:sass": "node-sass static/sass/main.scss static/css/style.css -w",
     "devserver": "live-server",
     "start-front": "npm-run-all --parallel devserver watch:sass",
-    "start": "node server.js",
-    "dev": "nodemon server.js"
+    "build:js": "parcel build ./public/js/controller.js --out-dir ./public/js --out-file bundle.js"
   },
+  "keywords": [],
   "author": "Hari",
   "license": "ISC",
-  "devDependencies": {
-    "node-sass": "^9.0.0",
-    "nodemon": "^3.1.10"
-  },
   "dependencies": {
     "bcrypt": "^6.0.0",
     "cloudinary": "^1.41.3",
@@ -29,5 +27,12 @@
     "multer": "^2.0.1",
     "multer-storage-cloudinary": "^4.0.0",
     "pug": "^3.0.3"
+  },
+  "devDependencies": {
+    "node-sass": "^9.0.0",
+    "nodemon": "^3.1.10"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
