@@ -30,9 +30,21 @@ block content
             option(value=facility)= facility
         p.form__row--error(style=errorType==="facility" ? "display:block" : "display:none") *Please select a facility
 
-        .form__row 
-          p.form__row--other Already have an account?
-            span 
-              a(href="/login") Login here
 
-        button.form__submit#register-submit(type="submit") Register     
+      .form__row#register-row-admincode
+        label.form__row--label(for="register-admincode") Admin Code
+        input.form__row--input#register-admincode(
+          type="number",
+          placeholder="Enter Admin Code",
+          min="0"
+        )
+        p.form__row--error#admincode-error(style="display:none; color: red") *Incorrect Admin Code
+
+      .form__row 
+        p.form__row--other Already have an account?
+          span 
+            a(href="/login") Login here
+
+      button.form__submit#register-submit(type="submit", disabled) Register   
+
+  script(src="/js/views/register.js") 

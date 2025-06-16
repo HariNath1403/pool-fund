@@ -62,7 +62,9 @@ form.form(action=isEdit ? `/api/txn/update/${transaction._id}` : '/api/txn/add',
 
   if user.role === 'Admin'
     button.form__submit(type="submit")= isEdit ? 'Update' : 'Submit'
+  else if !isEdit
+    button.form__submit(type="submit") Submit
   else
-    p You don't have permission to perform this action.
+    p You don't have permission to update this transaction.
 
   button.form__exit(type="button", onclick="window.history.back()") X

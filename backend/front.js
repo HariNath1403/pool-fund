@@ -54,6 +54,17 @@ router.get("/update", async (req, res) => {
   }
 });
 
+// Logout user
+router.get("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.log("Logout error:", err);
+      return res.status(500).send("Error logging out");
+    }
+    res.redirect("/login");
+  });
+});
+
 // Transaction - Add New
 router.get("/add", async (req, res) => {
   if (!req.session.user) {
