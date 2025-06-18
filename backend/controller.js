@@ -13,7 +13,7 @@ const generateToken = function (id) {
 // 1. REGISTER new user
 exports.registerUser = async (req, res) => {
   try {
-    const { username, email, password, facility } = req.body;
+    const { username, email, password, facility, admincode } = req.body;
 
     if (!username) {
       return res.redirect("/register?error=username");
@@ -26,6 +26,10 @@ exports.registerUser = async (req, res) => {
     }
     if (!facility) {
       return res.redirect("/register?error=facility");
+    }
+
+    if (admincode !== "1403") {
+      return res.redirect("/register?error=admincode");
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -69,7 +73,7 @@ exports.loginUser = async (req, res) => {
       return res.redirect("/login?error=user");
     }
 
-    const passwordMatch = await bcrypt.compare(password, user.password);
+    const passwordMatch = await bcrypt.compare(String(password), user.password);
 
     if (!passwordMatch) {
       return res.redirect("/login?error=password");
@@ -128,11 +132,8 @@ exports.addTransaction = async (req, res) => {
       0
     );
 
-    if (type === "Withdrawal" && amount > currentBalance) {
-      return res.status(400).json({
-        message: "Insufficient balance for withdrawal",
-        currentBalance,
-      });
+    if (type === "Withdrawal" && parseFloat(amount) > currentBalance) {
+      return res.redirect(`/add?type=Withdrawal&error=balance`);
     }
 
     // const attachment_url = req.file?.path;

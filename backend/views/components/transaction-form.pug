@@ -30,6 +30,7 @@ form.form(action=isEdit ? `/api/txn/update/${transaction._id}` : '/api/txn/add',
       required,
       value=transaction ? Math.abs(transaction.amount) : ''
     )
+    p.form__row--error(style=errorType==='balance' ? 'display:block' : 'display:none') *Amount exceeds balance.
 
   .form__row#txn-row-details
     label.form__row--label(for="txn-details") Details*

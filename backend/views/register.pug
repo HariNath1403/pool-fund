@@ -36,15 +36,17 @@ block content
         input.form__row--input#register-admincode(
           type="number",
           placeholder="Enter Admin Code",
-          min="0"
+          min="0",
+          name="admincode"
         )
-        p.form__row--error#admincode-error(style="display:none; color: red") *Incorrect Admin Code
+        p.form__row--error(style=errorType==="admincode" ? "display:block" : "display:none") *Incorrect Admin Code
+
 
       .form__row 
         p.form__row--other Already have an account?
           span 
             a(href="/login") Login here
 
-      button.form__submit#register-submit(type="submit", disabled) Register   
+      button.form__submit#register-submit(type="submit") Register   
 
-  script(src="/js/views/register.js") 
+  //- script(src="/js/views/register.js") 

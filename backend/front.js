@@ -86,6 +86,7 @@ router.get("/add", async (req, res) => {
       user,
       transaction: null,
       isEdit: false,
+      errorType: req.query.error || null,
     });
   } catch (err) {
     console.error("Error loading user: ", err);
